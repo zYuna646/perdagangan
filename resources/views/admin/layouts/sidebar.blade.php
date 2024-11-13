@@ -4,7 +4,7 @@
         <div class="brand-logo d-flex align-items-center justify-content-between">
             <a href="{{ route('admin.dashboard') }}" class="text-nowrap">
                 <div class="d-flex align-items-center">
-                    <h4 class="mb-0 px-2 fw-bolder">MASA TERA</h4>
+                    <h4 class="mb-0 px-2 fw-bolder">PERDAGANGAN</h4>
                 </div>
             </a>
             <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">

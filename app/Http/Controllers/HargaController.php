@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Harga;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class HargaController extends Controller
@@ -38,7 +39,8 @@ class HargaController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, 
+        $this->validate(
+            $request,
             [
                 'nama' => 'required|unique:hargas,nama',
                 'file_harga' => 'required|file', // Ensures a file is uploaded
@@ -51,16 +53,19 @@ class HargaController extends Controller
             ]
         );
 
-        // Handle file upload
-        $filePath = $request->file('file_harga')->store('hargas');
+        // Handle file upload to public accessible directory
+        $filePath = $request->file('file_harga')->store('public/hargas');
+        $url = Storage::url($filePath); // Generates '/storage/hargas/namafile.jpg'
 
         Harga::create([
             'nama' => $request->nama,
-            'file_harga' => $filePath,
+            'file_harga' => $url,
         ]);
 
         return redirect()->route('admin.harga')->with('success', 'Harga has been added!');
     }
+
+
 
     /**
      * Show the form for editing the specified resource.
@@ -80,7 +85,8 @@ class HargaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request, 
+        $this->validate(
+            $request,
             [
                 'nama' => 'required|unique:hargas,nama,' . $id,
                 'file_harga' => 'nullable|file', // Allows optional file upload

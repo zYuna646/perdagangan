@@ -73,10 +73,11 @@
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $result->nama }}</td>
                                 <td>
-                                    <a href="{{ asset('storage/' . $result->file_harga) }}" target="_blank">
+                                    <a href="{{ $result->file_harga }}" target="_blank">
                                         Download File
                                     </a>
                                 </td>
+                                
                                 <td>
                                     <a href="{{ route('admin.' . $active . '.edit', $result->id) }}"
                                         class="btn btn-sm btn-warning">
